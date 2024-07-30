@@ -96,7 +96,6 @@ class GoogleFTP:
 
             # Print the file details
             print("Files:")
-            if not items:
             for item in items:
                 print(f"{item['name']} ({item['mimeType']}, {item['modifiedTime']})")
 
@@ -129,19 +128,14 @@ class GoogleFTP:
 
             item = items[0]
 
-            # using the users destination file name determine
-            # which mimetype google can convert the file to
-            name = save_name.split('/')[-1]
-            mimetype = self.MIMETYPES.get(name.split('.')[-1])
-
             # setup the download request
-            request = self.service.files().export_media(
-                fileId=item.get("id"), mimeType=mimetype
+            request = self.service.files().get_media(
+                fileId=item.get("id")
             )
             file = io.BytesIO()
             downloader = MediaIoBaseDownload(file, request)
 
-            # download the file
+            # download the file and show the progess
             done = False
             while done is False:
                 status, done = downloader.next_chunk()
@@ -224,16 +218,16 @@ def help(option):
     match option:
         case "ls":
             print("Invalid use. Example ./main.py ls")
-            print("(e.g. ./main.py ls")
+            print("(e.g. ./main.py ls)")
         case "dcp":
             print("Invalid use. Example ./main.py dcp <file-name> <destination>")
-            print("(e.g. ./main.py dcp 'hello world' ../download.txt")
+            print("(e.g. ./main.py dcp 'hello world' ../download.txt)")
         case "ucp":
             print("Invalid use. Example ./main.py ucp <source>")
-            print("(e.g. ./main.py dcp ../download.txt")
+            print("(e.g. ./main.py ucp ../download.txt)")
         case "rm":
             print("Invalid use. Example ./main.py rm <file-name>")
-            print("(e.g. ./main.py dcp 'hello world'")
+            print("(e.g. ./main.py rm 'hello world')")
         case _:
             print("Invalid use. Example ./main.py <option>")
             print("Possible options:")
@@ -255,31 +249,18 @@ def main():
 
     # determine how the user would like to use the program
     match args[1]:
-        case "ls":
-            if len(args) != 2:
-                help("ls")
-                quit()
-            else:
-                api.FileList()
-        case "dcp":
-            if len(args) != 4:
-                help("dcp")
-                quit()
-            else:
-                api.FileDownload(args[2], args[3])
-        case "ucp":
-            if len(args) != 3:
-                help("ucp")
-                quit()
-            else:
-                api.FileUpload(args[2])
-        case "rm":
-            if len(args) != 3:
-                help("rm")
-                quit()
-            else:
-                api.FileRemove(args[2])
-        case _:
+        case arg if arg == "ls"  and len(args) == 2:
+            api.FileList()
+        case arg if arg == "dcp" and len(args) == 4:
+            api.FileDownload(args[2], args[3])
+        case arg if arg == "ucp" and len(args) == 3:
+            api.FileUpload(args[2])
+        case arg if arg == "rm"  and len(args) == 3:
+            api.FileRemove(args[2])
+        case "ls" | "dcp" | "ucp" | "rm" :
+            help(args[1])
+            quit()
+        case _ :
             help("")
             quit()
 

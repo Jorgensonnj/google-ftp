@@ -49,17 +49,30 @@ Here are some examples of the cli in use
 
 * Listing all files
   ```sh
-  ./main.py ls
+  ./gftp.py ls
   ```
 * Uploading a file
   ```sh
-  ./main.py ucp ~/test.docx
+  ./gftp.py ucp ~/test.docx
   ```
 * Downloading a file
   ```sh
-  ./main.py dcp "test.docx" ~/test.docx
+  ./gftp.py dcp "test.docx" ~/test.docx
   ```
 * Removing a file
   ```sh
-  ./main.py rm "test.docx"
+  ./gftp.py rm "test.docx"
   ```
+
+## Usage
+
+How to test
+
+1. Navigate to project root directory
+   ```sh
+   cd /path/to/google-ftp
+   ```
+2. Run Tests
+   ```sh
+   python3 -m test.tests
+   ```
