@@ -76,3 +76,9 @@ How to test
    ```sh
    python3 -m test.tests
    ```
+## Assumptions
+
+* The user is familiar with the command line and is able to execute the program
+* The user is more comfortable giving a file name from their google drive than providing a file id
+* The google drive contains only files and no folders
+* The user is able to save files to their file system
