@@ -64,7 +64,7 @@ Here are some examples of the cli in use
   ./gftp.py rm "test.docx"
   ```
 
-## Usage
+## Testing
 
 How to test
 
