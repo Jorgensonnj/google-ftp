@@ -222,19 +222,19 @@ class GoogleFTP:
 def help(option):
     match option:
         case "ls":
-            print("Invalid use. Example ./main.py ls")
-            print("(e.g. ./main.py ls)")
+            print("Invalid use. Example ./gftp.py ls")
+            print("(e.g. ./gftp.py ls)")
         case "dcp":
-            print("Invalid use. Example ./main.py dcp <file-name> <destination>")
-            print("(e.g. ./main.py dcp 'hello world' ../download.txt)")
+            print("Invalid use. Example ./gftp.py dcp <file-name> <destination>")
+            print("(e.g. ./gftp.py dcp 'hello world' ../download.txt)")
         case "ucp":
-            print("Invalid use. Example ./main.py ucp <source>")
-            print("(e.g. ./main.py ucp ../download.txt)")
+            print("Invalid use. Example ./gftp.py ucp <source>")
+            print("(e.g. ./gftp.py ucp ../download.txt)")
         case "rm":
-            print("Invalid use. Example ./main.py rm <file-name>")
-            print("(e.g. ./main.py rm 'hello world')")
+            print("Invalid use. Example ./gftp.py rm <file-name>")
+            print("(e.g. ./gftp.py rm 'hello world')")
         case _:
-            print("Invalid use. Example ./main.py <option>")
+            print("Invalid use. Example ./gftp.py <option>")
             print("Possible options:")
             print(" - ls: list files")
             print(" - dcp: download a file")
