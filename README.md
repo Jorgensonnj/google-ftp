@@ -41,7 +41,7 @@ Install dependencies using the following methods.
    ```
 3. Create [Google Account](https://developers.google.com/workspace/guides/create-project) with Google Drive API enabled
 4. Create [Google Cloud Project](https://developers.google.com/drive/api/quickstart/python)
-5. Save the downloaded JSON file as `creds.json`, and move the file to your google-ftp project directory
+5. Create and save credentials for a desktop application as a JSON file named `creds.json`, and move the file to your google-ftp project root directory
 
 ## Usage
 
