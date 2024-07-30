@@ -239,7 +239,7 @@ def help(option):
             print(" - ls: list files")
             print(" - dcp: download a file")
             print(" - ucp: upload a file")
-            print(" - rm: upload a file")
+            print(" - rm: remove a file")
 
 def main():
     # get command line arguments
