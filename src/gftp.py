@@ -76,13 +76,19 @@ class GoogleFTP:
         except HttpError as error:
             print(f"An error occurred: {error}")
 
+    # close the socket when done
+    def __del__(self):
+        self.service._http.http.close()
+
     # list the files
     def FileList(self):
         try:
             results = (
                 self.service.files()
                 .list(
-                    pageSize=10, fields="nextPageToken, files(name, mimeType, modifiedTime)"
+                    q="trashed=false",
+                    pageSize=10,
+                    fields="nextPageToken, files(name, mimeType, modifiedTime)"
                 )
                 .execute()
             )
@@ -113,7 +119,7 @@ class GoogleFTP:
             results = (
                 self.service.files()
                 .list(
-                    q="name='" + download_file_name + "'",
+                    q="name='" + download_file_name + "' and trashed=false",
                     pageSize=10,
                     fields="nextPageToken, files(name, id, mimeType)")
                 .execute()
@@ -181,7 +187,6 @@ class GoogleFTP:
             return False
 
     def FileRemove(self, remove_file_name):
-        print(remove_file_name)
         try:
             # determine if the user given file name exists
             results = (
@@ -248,6 +253,7 @@ def main():
     api = GoogleFTP()
 
     # determine how the user would like to use the program
+    # and if they are using it correctly
     match args[1]:
         case arg if arg == "ls"  and len(args) == 2:
             api.FileList()
